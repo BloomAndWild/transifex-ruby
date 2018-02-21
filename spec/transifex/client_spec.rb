@@ -69,10 +69,11 @@ describe Transifex::Client do
         subject { client.project(slug).resource(resource_slug).stats(lang) }
 
         before do
-          stub_get("/project/#{slug}/resource/#{resource_slug}/stats/#{lang}").to_return(
-            body: fixture('stats.json'),
-            headers: BASE_HEADERS
-          )
+          stub_get("/project/#{slug}/resource/#{resource_slug}/stats/#{lang}/")
+            .to_return(
+              body: fixture('stats.json'),
+              headers: BASE_HEADERS
+            )
         end
 
         it 'returns an Stats object' do
