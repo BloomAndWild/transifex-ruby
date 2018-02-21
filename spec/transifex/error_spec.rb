@@ -14,7 +14,7 @@ describe Transifex::Error do
   }.each do |status, exception|
     context "when HTTP response status is #{status}" do
       before do
-        stub_get('/project/xyz/').to_return(status: status)
+        stub_get('project/xyz/').to_return(status: status)
       end
 
       it "should raise #{exception.name} error" do

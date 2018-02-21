@@ -11,12 +11,12 @@ module Transifex
     end
 
     def content
-      client.get("/project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}/")["content"]
+      client.get("project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}/")["content"]
     end
 
     def strings args = {}
       client.get(
-        "/project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}/strings",
+        "project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}/strings",
         args,
       )
     end
@@ -24,21 +24,21 @@ module Transifex
     def string key
       source_hash = Digest::MD5.hexdigest(key + ":")
       client.get(
-        "/project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}/string/#{source_hash}",
+        "project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}/string/#{source_hash}",
       )
     end
 
     def update_string key, translation
       source_hash = Digest::MD5.hexdigest(key + ":")
       client.put(
-        "/project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}/string/#{source_hash}",
+        "project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}/string/#{source_hash}",
         { translation: translation }.to_json,
       )
     end
 
     def update(content)
       client.put(
-        "/project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}",
+        "project/#{@project_slug}/resource/#{@resource_slug}/translation/#{@language_code}",
         { content: content.to_json }.to_json,
       )
     end

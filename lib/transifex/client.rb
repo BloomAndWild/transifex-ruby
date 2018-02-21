@@ -12,13 +12,13 @@ module Transifex
     end
 
     def projects
-      get('/projects/').map do |project|
+      get("projects/").map do |project|
         Transifex::Project.new(project).tap {|p| p.client = self }
       end
     end
 
     def project(slug)
-      Transifex::Project.new(get("/project/#{slug}/")).tap do |project|
+      Transifex::Project.new(get("project/#{slug}/")).tap do |project|
         project.client = self
       end
     end
@@ -39,7 +39,7 @@ module Transifex
     end
 
     def languages(project_slug)
-      get("/project/#{project_slug}/languages/").map do |language|
+      get("project/#{project_slug}/languages/").map do |language|
         Transifex::Language.new(project_slug, language).tap do |language|
           language.client = self
         end
@@ -47,7 +47,7 @@ module Transifex
     end
 
     def stats(project_slug, resource_slug)
-      url = "/project/#{project_slug}/resource/#{resource_slug}/stats/"
+      url = "project/#{project_slug}/resource/#{resource_slug}/stats/"
 
       get(url).each_with_object({}) do |(lang, stats), ret|
         ret[lang] = Transifex::Stats.new(stats).tap do |r|

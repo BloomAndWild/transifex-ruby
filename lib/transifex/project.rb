@@ -10,18 +10,18 @@ module Transifex
     end
 
     def resources
-      client.get("/project/#{@slug}/resources/").map do |resource|
+      client.get("project/#{@slug}/resources/").map do |resource|
         Transifex::Resource.new(@slug, resource).tap {|r| r.client = client }
       end
     end
 
     def resource(resource_slug)
-      resource = client.get("/project/#{@slug}/resource/#{resource_slug}")
+      resource = client.get("project/#{@slug}/resource/#{resource_slug}")
       Transifex::Resource.new(@slug, resource).tap {|r| r.client = client }
     end
 
     def languages
-      client.get("/project/#{@slug}/languages/").map do |language|
+      client.get("project/#{@slug}/languages/").map do |language|
         Transifex::Language.new(@slug, language).tap {|r| r.client = client }
       end
     end

@@ -7,7 +7,7 @@ describe Transifex::Client do
     subject { client.projects }
 
     before do
-      stub_get('/projects/').to_return(
+      stub_get("projects/").to_return(
         body: fixture('projects.json'),
         headers: BASE_HEADERS
       )
@@ -23,10 +23,11 @@ describe Transifex::Client do
     subject { client.project(slug) }
 
     before do
-      stub_get("/project/#{slug}/").to_return(
-        body: fixture('project.json'),
-        headers: BASE_HEADERS
-      )
+      stub_get("project/#{slug}/")
+        .to_return(
+          body: fixture('project.json'),
+          headers: BASE_HEADERS
+        )
     end
 
     it 'returns a Project object' do
@@ -37,7 +38,7 @@ describe Transifex::Client do
       subject { client.project(slug).resources }
 
       before do
-        stub_get("/project/#{slug}/resources/").to_return(
+        stub_get("project/#{slug}/resources/").to_return(
           body: fixture('resources.json'),
           headers: BASE_HEADERS
         )
@@ -53,7 +54,7 @@ describe Transifex::Client do
       subject { client.project(slug).resource(resource_slug) }
 
       before do
-        stub_get("/project/#{slug}/resource/#{resource_slug}").to_return(
+        stub_get("project/#{slug}/resource/#{resource_slug}").to_return(
           body: fixture('resource.json'),
           headers: BASE_HEADERS
         )
@@ -69,7 +70,7 @@ describe Transifex::Client do
         subject { client.project(slug).resource(resource_slug).stats(lang) }
 
         before do
-          stub_get("/project/#{slug}/resource/#{resource_slug}/stats/#{lang}/")
+          stub_get("project/#{slug}/resource/#{resource_slug}/stats/#{lang}/")
             .to_return(
               body: fixture('stats.json'),
               headers: BASE_HEADERS
@@ -86,7 +87,7 @@ describe Transifex::Client do
       subject { client.project(slug).languages }
 
       before do
-        stub_get("/project/#{slug}/languages/").to_return(
+        stub_get("project/#{slug}/languages/").to_return(
           body: fixture('languages.json'),
           headers: BASE_HEADERS
         )

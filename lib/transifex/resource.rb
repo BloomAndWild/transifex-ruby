@@ -12,7 +12,7 @@ module Transifex
     end
 
     def content
-      client.get("/project/#{@project_slug}/resource/#{@slug}/content/")
+      client.get("project/#{@project_slug}/resource/#{@slug}/content/")
     end
 
     def translation(lang)
@@ -22,7 +22,7 @@ module Transifex
     end
 
     def stats(lang = nil)
-      base_url = "/project/#{@project_slug}/resource/#{@slug}/stats/"
+      base_url = "project/#{@project_slug}/resource/#{@slug}/stats/"
 
       if lang
         stats = client.get("#{base_url}#{lang}/")
@@ -39,7 +39,7 @@ module Transifex
 
     def update_content(content)
       client.put(
-        "/project/#{@project_slug}/resource/#{@slug}/content/",
+        "project/#{@project_slug}/resource/#{@slug}/content/",
         {content: content.to_json}.to_json
       )
     end
