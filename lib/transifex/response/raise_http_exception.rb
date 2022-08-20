@@ -1,13 +1,14 @@
 require 'transifex/error'
-require 'faraday_middleware'
+require 'faraday'
 
 module Transifex
   module Response
     class RaiseHttpException < Faraday::Response::Middleware
       def call(env)
-        @app.call(env).on_complete do |response|
-          resp = response[:response]
-          case response[:status].to_i
+        @app.call(env).on_complete do |response_env|
+          resp = response_env.response
+
+          case response_env.status
           when 401
             raise Transifex::Unauthorized.new(resp)
           when 403
