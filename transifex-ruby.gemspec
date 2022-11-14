@@ -19,13 +19,14 @@ Gem::Specification.new do |s|
   s.authors       = ['Toru Maesaka', 'Jason Barnabe']
   s.email         = ['toru@tmaesaka.com', 'jason.barnabe@gmail.com']
 
-  s.add_dependency 'faraday', '>= 0.8.0'
-  s.add_dependency 'faraday_middleware', '~> 0.10'
-  s.add_dependency 'hashie', '>= 1.2.0'
+  s.add_dependency 'faraday', '> 1.0.0', '< 2.0.0'
 
-  s.add_development_dependency 'bundler', '~> 1.3'
+  # Required for faraday-rashify
+  s.add_dependency 'rash_alt'
+
+  s.add_development_dependency 'bundler'
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec', '~> 3.5'
+  s.add_development_dependency 'rspec'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'webmock'
   s.add_development_dependency 'pry'

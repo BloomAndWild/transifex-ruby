@@ -1,5 +1,5 @@
 require 'faraday'
-require 'faraday_middleware'
+require 'faraday/rashify'
 
 module Transifex
   module Request
@@ -44,8 +44,8 @@ module Transifex
       }
 
       Faraday.new(options) do |builder|
-        builder.use FaradayMiddleware::Mashify
-        builder.use Faraday::Response::ParseJson, :content_type => /\bjson$/
+        builder.use Faraday::Rashify::Middleware
+        builder.response :json
         builder.use Transifex::Response::RaiseHttpException
 
         # Authentiation
